@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-let counter = 10;
+let counter = 0;
 
 app.get('/counter', (req, res) => {
     res.json({ value: counter });
