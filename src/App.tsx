@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useCounter from './components/hooks/useCounter';
 import Button from './components/buttom/button';
 import './App.css';
@@ -5,7 +6,11 @@ import './App.css';
 
 
 function App() {
-    const {count, plusCount, minusCount, randomCounter, reset } = useCounter();
+    const {count, plusCount, minusCount, randomCounter, reset, fetchCounter } = useCounter();
+
+    useEffect(() => {
+        fetchCounter();
+    }, []);
 
     const dataButton = [
         { name: 'Plus', f: plusCount },
