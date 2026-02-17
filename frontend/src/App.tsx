@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import useCounter from './components/hooks/useCounter';
 import Button from './components/buttom/button';
+import { initUserId } from './userID';
 import './App.css';
-
 
 
 function App() {
     const {count, plusCount, minusCount, randomCounter, reset, fetchCounter } = useCounter();
 
     useEffect(() => {
+        initUserId();
         fetchCounter();
     }, []);
 
