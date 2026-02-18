@@ -1,38 +1,53 @@
 import { create } from 'zustand';
 import { getCounter, setCounter } from '../../Api';
 
+
 const useCounter = create((set, get) => ({
     count: 0,
-    fetchCounter: async () => {
-        const data = await getCounter();
-        set({ count: data.value });
+    id: '',
+
+    initUserIdState: (res) => {
+        const newValue = res.userID;
+        console.log(newValue);
+        set({id: newValue});
+    },
+
+    fetchCounter: async (res) => {
+        const id = res.userID;
+        if (!id) {
+            return
+        }
+
+        const data = await getCounter(id);
+        set({ count: data.count });
     },
 
     plusCount: async () => {
-        const newValue = get().count + 1; 
+        const state = get();
+        const newValue = state.count + 1; 
         set({ count: newValue });        
-        await setCounter(newValue);
+        await setCounter(state.id, newValue);
     },  
 
     minusCount: async () => {
         const state = get();
         const newValue = state.count > 0 ? state.count - 1 : state.count;
         set({ count: newValue });
-        await setCounter(newValue);
+        await setCounter(state.id, newValue);
     },
 
     randomCounter: async () => {
         const state = get();
-        const newValue = state.count = Math.floor(Math.random() * (0 - 100) + 100);
+        const newValue = Math.floor(Math.random() * (0 - 100) + 100);
         set({ count: newValue });
-        await setCounter(newValue);
+        await setCounter(state.id, newValue);
     },
 
     reset: async () => {
         const state = get();
-        const newValue = state.count = 0;
+        const newValue = 0;
         set({ count: newValue });
-        await setCounter(newValue);
+        await setCounter(state.id, newValue);
     },
 }));
 

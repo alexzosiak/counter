@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import {readDB, writeDB} from './ssd.ts';
-
+import { readDB, writeDB } from './ssd.ts';
+import { count } from 'console';
 
 const app = express();
 const PORT = 3000;
@@ -9,36 +9,41 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-let counter = 105;
+app.get('/counter/:id', (req, res) => {
+    const db = readDB();
+    const user = db[req.params.id];
 
-
-app.get('/counter', (req, res) => {
-    res.json({ value: counter });
-});
-
-app.post('/counter', (req, res) => {
-    const { value } = req.body;
-
-    if (typeof value !== 'number') {
-        return res.status(400).json({ error: 'Value must be a number' });
+    if (!user) {
+        return res.status(404).json({ error: 'Not found' });
     }
 
-    counter = value;
-
-    res.json({
-        message: 'Counter updated',
-        value: counter,
-    });
+    res.json(user);
 });
 
-app.post("/init", (req, res) => {
-  const db = readDB();
-  const id = Math.random().toString(36).substring(2, 10);
+app.post('/counter/:id', (req, res) => {
+    const db = readDB();
+    const user = db[req.params.id];
 
-  db[id] = { count: 0 };
-  writeDB(db);
+    if (!user) {
+        return res.status(404).json({ error: 'Not found' });
+    }
 
-  res.json({ id, count: 0 });
+    const { value } = req.body;
+    user.count = value;
+    writeDB(db);
+
+    res.json(user);
+});
+
+
+app.post('/init', (req, res) => {
+    const db = readDB();
+    const id = Math.random().toString(36).substring(2, 10);
+
+    db[id] = { count: 0 };
+    writeDB(db);
+
+    res.json({ id, count: 0 });
 });
 
 app.listen(PORT, () => {

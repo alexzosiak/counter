@@ -2,15 +2,20 @@ import { useEffect } from 'react';
 import useCounter from './components/hooks/useCounter';
 import Button from './components/buttom/button';
 import { initUserId } from './userID';
+
 import './App.css';
 
-
 function App() {
-    const {count, plusCount, minusCount, randomCounter, reset, fetchCounter } = useCounter();
+    const { count, plusCount, minusCount, randomCounter, reset, fetchCounter, initUserIdStat } = useCounter();
 
     useEffect(() => {
-        initUserId();
-        fetchCounter();
+        const init = async () => {
+            const id = await initUserId();
+            initUserIdState(id);
+            fetchCounter(id);
+        };
+
+        init();
     }, []);
 
     const dataButton = [
@@ -22,14 +27,12 @@ function App() {
 
     const viewButtons = dataButton.map((item, index) => {
         return <Button text={item.name} event={item.f} key={index}></Button>;
-    })
+    });
 
     return (
-        <>  
+        <>
             <h1>{count}</h1>
-            <div className='btn__wrapper'>
-                {viewButtons}
-            </div>
+            <div className="btn__wrapper">{viewButtons}</div>
         </>
     );
 }
