@@ -6,7 +6,7 @@ import { initUserId } from './userID';
 import './App.css';
 
 function App() {
-    const { count, plusCount, minusCount, randomCounter, reset, fetchCounter, initUserIdStat } = useCounter();
+    const { count, plusCount, minusCount, randomCounter, reset, fetchCounter, initUserIdState } = useCounter();
 
     useEffect(() => {
         const init = async () => {
