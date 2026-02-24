@@ -9,11 +9,11 @@ export const initUserId = async () => {
         });
 
         const data = await res.json();
-
+        
         localStorage.setItem('userId', data.id);
        
         return data.id;
     }
 
-    return { userID }  ;
+    return { userID };
 };

@@ -1,3 +1,4 @@
+import { error } from 'console';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,18 +14,23 @@ type Data = {
     };
 }
 
-export async function writeDB(data: Data): void {
-   await fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+export function writeDB(data: Data): void {
+    try {
+        fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+    } catch {
+        throw new Error(`file SSD.ts / 21 line = write database does not work`);
+    }
+   
 }
 
-export async function readDB(): Data {
+export function readDB() {
     if (!fs.existsSync(dbPath)) {
         console.log('DB file not found, creating new one');
-        await fs.writeFileSync(dbPath, JSON.stringify({}, null, 2));
+        fs.writeFileSync(dbPath, JSON.stringify({}, null, 2));
         return  {};
     }
 
-    const content = await fs.readFileSync(dbPath, 'utf-8');
+    const content = fs.readFileSync(dbPath, 'utf-8');
 
     if (!content) {
         return {};

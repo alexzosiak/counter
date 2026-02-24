@@ -1,15 +1,25 @@
 import { create } from 'zustand';
-import { getCounter, setCounter } from '../../Api';
+import { getCounter, setCounter, setSave, getSave } from '../../Api';
 
 
 const useCounter = create((set, get) => ({
     count: 0,
     id: '',
+    save: [],
 
     initUserIdState: (res) => {
         const newValue = res.userID;
         console.log(newValue);
         set({id: newValue});
+    },
+
+    fetchSave: async (res) => {
+        const id = res.userID;
+        if(!id) {
+            return
+        }
+        const data = await getSave(id);
+        set({save: data.save})
     },
 
     fetchCounter: async (res) => {
@@ -49,6 +59,14 @@ const useCounter = create((set, get) => ({
         set({ count: newValue });
         await setCounter(state.id, newValue);
     },
+
+    onSave: async () => {
+        const {id, count} = get();
+        const newValue = 0;
+        set({count: newValue});
+        await setCounter(id, newValue);
+        await setSave(id, count);
+    }
 }));
 
 export default useCounter;
