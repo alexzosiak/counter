@@ -1,0 +1,29 @@
+
+.save {
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        
+    }
+
+    &__text {
+        font-size: 20px;
+    }
+    
+    &__bin {
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+    }
+}
+
+

@@ -30,3 +30,13 @@ export const setSave = async (id: string, value: number ) => {
         body: JSON.stringify({ value }),
     });
 }
+
+export const deleteSaveItem = async (idUser: string, idSave: string) => {
+    await fetch(`${way}/delete/${idUser}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ idUser, idSave }),
+    })
+}

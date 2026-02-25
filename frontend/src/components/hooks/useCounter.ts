@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { getCounter, setCounter, setSave, getSave } from '../../Api';
-
+import { getCounter, setCounter, setSave, getSave, deleteSaveItem} from '../../Api';
 
 const useCounter = create((set, get) => ({
     count: 0,
@@ -13,7 +12,7 @@ const useCounter = create((set, get) => ({
         set({id: newValue});
     },
 
-    fetchSave: async (res) => {
+    initSave: async (res) => {
         const id = res.userID;
         if(!id) {
             return
@@ -22,7 +21,7 @@ const useCounter = create((set, get) => ({
         set({save: data.save})
     },
 
-    fetchCounter: async (res) => {
+    initCounter: async (res) => {
         const id = res.userID;
         if (!id) {
             return
@@ -66,20 +65,17 @@ const useCounter = create((set, get) => ({
         set({count: newValue});
         await setCounter(id, newValue);
         await setSave(id, count);
+        const data = await getSave(id);
+        set({ save: data.save})
+    },
+
+    onDelete: async (res) => {
+        const state = get();
+
+        await deleteSaveItem(state.id, res);
+        const data = await getSave(state.id);
+        set({ save: data.save });
     }
 }));
 
 export default useCounter;
-
-
-
-
-
-
-// const useCounter = create((set) => ({
-//     count: 0,
-//     plusCount: () => set((state) => ({ count: state.count + 1 })),
-//     minusCount: () => set((state) => (state.count > 0 ? { count: state.count - 1 } : state)),
-//     randomCounter: () => set((state) => ({ count: Math.floor(Math.random() * (0 - 100) + 100)})),
-//     reset: () => set({ count: 0 }),
-// }));

@@ -7,19 +7,21 @@ import SaveCounters from './components/saveCounters/save-counters';
 import './App.css';
 
 function App() {
-    const {save, count, plusCount, minusCount, randomCounter, reset, fetchCounter, initUserIdState, onSave, fetchSave } = useCounter();
+    const { count, plusCount, minusCount, randomCounter, reset, initCounter, initUserIdState, onSave, initSave } = useCounter();
 
     useEffect(() => {
         const init = async () => {
             const id = await initUserId();
             initUserIdState(id);
-            fetchCounter(id);
-            fetchSave(id)
+            initCounter(id);
+            initSave(id)
         };
 
         init();
+        
     }, []);
 
+    
   
     const dataButton = [
         { name: 'Plus', f: plusCount },

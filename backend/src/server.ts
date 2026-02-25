@@ -75,6 +75,24 @@ app.post('/save/:id', (req, res) => {
     res.json(user);
 })
 
+app.post('/delete/:id', (req, res) => {
+    const db = readDB();
+    const user = db[req.params.id];
+    const { idUser, idSave } = req.body;
+    
+    if (!db[idUser]) {
+        return res.status(404).json({ error: "User not found" });
+    }
+
+    db[idUser].save = db[idUser].save.filter(
+        item => item.id !== idSave
+    );
+
+    writeDB(db)
+    
+    res.json({message: 'item deleted'});
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
