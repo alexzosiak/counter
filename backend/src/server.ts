@@ -40,6 +40,7 @@ app.post('/init', (req, res) => {
     const db = readDB();
     const id = Math.random().toString(36).substring(2, 10);
 
+
     db[id] = { count: 0, save: [] };
     writeDB(db);
 
@@ -60,15 +61,18 @@ app.get('/save/:id', (req, res) => {
 app.post('/save/:id', (req, res) => {
     const db = readDB();
     const user = db[req.params.id];
-    
+    const time = Date.now();
+
     const id = Math.random().toString(36).substring(2, 10);
     if (!user) {
         return res.status(404).json({ error: 'Not found' });
     }
 
+
+
     const { value } = req.body;
 
-    user.save.push({id: id, value: value})
+    user.save.push({id: id, value: value, timestamp: time})
    
     writeDB(db);
 
