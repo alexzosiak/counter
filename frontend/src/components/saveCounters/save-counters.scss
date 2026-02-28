@@ -1,22 +1,57 @@
+@use '../../scss/variables.scss' as *;
 
 .save {
+    margin-top: 20px;
+    padding: 10px;
+    grid-row: 1 / 2;
+    min-width: 400px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    border: 0.1px solid rgba(0, 0, 0, 0.1);
+    border-top: 25px solid $first-color;
+    border-radius: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    &__title {
+        text-align: center;
+    }
 
     &__list {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 4px;
+        
     }
 
     &__item {
         display: flex;
+        justify-content: space-around;
         align-items: center;
         gap: 10px;
-        
+        width: 300px;
+        border: 1px solid rgba(0, 0, 0, 0.297);
+        padding: 2px 5px;
+        border-radius: 5px;
     }
 
+     &__item-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
     &__text {
-        font-size: 20px;
+        font-size: 1.7rem;
+        font-weight: 500;
+    }
+    &__time-title {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    
+    &__time {
+        font-size: 0.6rem;
     }
     
     &__bin {

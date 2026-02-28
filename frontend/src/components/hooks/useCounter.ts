@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getCounter, setCounter, setSave, getSave, deleteSaveItem} from '../../Api';
+import { getCounter, setCounter, setSave, getSave, deleteSaveItem} from '../../api/Api';
 
 const useCounter = create((set, get) => ({
     count: 0,

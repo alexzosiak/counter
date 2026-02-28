@@ -1,6 +1,5 @@
 
-
-export const timeTransform = (elementTime: string) => {
+const timeTransform = (elementTime: string) => {
     const time =  new Date(elementTime);
     console.log(time);
     const year = String(time.getFullYear()).padStart(2, '0');
@@ -12,3 +11,5 @@ export const timeTransform = (elementTime: string) => {
 
     return {year, month, day, hours, minutes, seconds}
 }
+
+export default timeTransform;
