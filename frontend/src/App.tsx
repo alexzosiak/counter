@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react';
-import useCounter from '../hooks/useCounter';
-import Button from '../buttom/button';
-import { initUserId } from '../../util/user-id/userID';
-import SaveCounters from '../saveCounters/save-counters';
-import Header from '../header/header';
-
+import { useEffect } from 'react';
+import useCounter from './components/hooks/useCounter';
+import Button from './components/buttom/button';
+import { initUserId } from './util/user-id/userID';
+import SaveCounters from './components/saveCounters/save-counters';
+import Header from './components/header/header';
 
 
 import './app.scss';
 
 function App() {
-    const { count, plusCount, minusCount, randomCounter, reset, initCounter, initUserIdState, onSave, initSave } = useCounter();
-    const [historyOn, setHistory] = useState(false);
+    const { count, plusCount, minusCount, randomCounter, reset, initCounter, initUserIdState, onSave, initSave, history } = useCounter();
 
     useEffect(() => {
         const init = async () => {
@@ -24,14 +22,6 @@ function App() {
         init();
         
     }, []);
-
-    function chengHistory() {
-        if (historyOn) {
-            setHistory(false);
-        } else {
-            setHistory(true);
-        }
-    }
 
     const dataButton = [
         { name: 'Plus', f: plusCount },
@@ -47,13 +37,13 @@ function App() {
 
     return (
         <>
-            <Header historyOn={historyOn} chengHistory={chengHistory}/>
+            <Header/>
                 <div className='container'>
                     <section className='card'>
                         <span className='card__count'>{count}</span>
                         <div className="card__wrapper">{viewButtons}</div>
                     </section>
-                    {historyOn ? <SaveCounters/> : null}
+                    {history ? <SaveCounters/> : null}
                 </div>
         </>
     );

@@ -5,6 +5,7 @@ const useCounter = create((set, get) => ({
     count: 0,
     id: '',
     save: [],
+    history: false,
 
     initUserIdState: (res) => {
         const newValue = res.userID;
@@ -75,6 +76,15 @@ const useCounter = create((set, get) => ({
         await deleteSaveItem(state.id, res);
         const data = await getSave(state.id);
         set({ save: data.save });
+    },
+
+    toggleHistory: async () => {
+        const state = get();
+        if (!state.history) {
+            set({ history: true });
+        } else {
+            set({ history: false });
+        }
     }
 }));
 

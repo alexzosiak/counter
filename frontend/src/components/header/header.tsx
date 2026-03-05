@@ -1,7 +1,10 @@
 import './header.scss';
 import logo from '../../assets/counter.svg';
+import useCounter from '../hooks/useCounter';
 
-const Header = ({chengHistory, historyOn}) => {
+const Header = () => {
+    const { history, toggleHistory} = useCounter();
+
     return (
         <header className="header">
             <div className="header__wrapper-title">
@@ -18,7 +21,7 @@ const Header = ({chengHistory, historyOn}) => {
                 <nav className="nav">
                     <ul className="nav__list">
                         <li className="nav__item">
-                            <a className="nav__link"  onClick={() => chengHistory()}>{!historyOn ? 'open history' : 'closet history'}</a>
+                            <a className="nav__link" onClick={() => toggleHistory()}>{history ? 'open history' : 'closet history'}</a>
                         </li>
                         <li className="nav__item">
                             <a className="nav__link" href="">about</a>
