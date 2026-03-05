@@ -31,10 +31,12 @@ const SaveCounters = () => {
         )
     });
     
+    const sortElements = elements.reverse();
+    
     return (
         <section className='save'>
             <h3 className='save__title'>history</h3>
-            <ul className='save__list'>{elements}</ul>
+            <ul className='save__list'>{sortElements}</ul>
         </section>
     )
 }
