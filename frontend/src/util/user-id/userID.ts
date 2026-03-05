@@ -1,5 +1,4 @@
 
-
 export const initUserId = async () => {
     const userID = localStorage.getItem('userId');
 
@@ -14,6 +13,6 @@ export const initUserId = async () => {
        
         return data.id;
     }
-
+    console.log(`file UserID / line 17 = ${userID}`);
     return { userID };
 };

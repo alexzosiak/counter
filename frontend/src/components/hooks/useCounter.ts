@@ -1,20 +1,22 @@
 import { create } from 'zustand';
 import { getCounter, setCounter, setSave, getSave, deleteSaveItem} from '../../api/Api';
 
+
+
 const useCounter = create((set, get) => ({
     count: 0,
     id: '',
     save: [],
     history: false,
 
-    initUserIdState: (res) => {
-        const newValue = res.userID;
+    initUserIdState: (res: string) => {
+        const newValue = res;
         console.log(newValue);
         set({id: newValue});
     },
 
-    initSave: async (res) => {
-        const id = res.userID;
+    initSave: async (res: string) => {
+        const id = res;
         if(!id) {
             return
         }
@@ -22,8 +24,8 @@ const useCounter = create((set, get) => ({
         set({save: data.save})
     },
 
-    initCounter: async (res) => {
-        const id = res.userID;
+    initCounter: async (res: string) => {
+        const id = res;
         if (!id) {
             return
         }
@@ -70,7 +72,7 @@ const useCounter = create((set, get) => ({
         set({ save: data.save})
     },
 
-    onDelete: async (res) => {
+    onDelete: async (res: string) => {
         const state = get();
 
         await deleteSaveItem(state.id, res);

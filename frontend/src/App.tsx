@@ -3,7 +3,7 @@ import useCounter from './components/hooks/useCounter';
 import Button from './components/buttom/button';
 import { initUserId } from './util/user-id/userID';
 import SaveCounters from './components/saveCounters/save-counters';
-import Header from './components/header/header';
+import Header from './components/AppHeader/AppHeader';
 
 
 import './app.scss';
@@ -14,9 +14,9 @@ function App() {
     useEffect(() => {
         const init = async () => {
             const id = await initUserId();
-            initUserIdState(id);
-            initCounter(id);
-            initSave(id)
+            initUserIdState(id.userID);
+            initCounter(id.userID);
+            initSave(id.userID);
         };
 
         init();
