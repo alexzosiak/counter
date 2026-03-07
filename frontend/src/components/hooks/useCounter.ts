@@ -7,7 +7,6 @@ const useCounter = create((set, get) => ({
     count: 0,
     id: '',
     save: [],
-    history: false,
 
     initUserIdState: (res: string) => {
         const newValue = res;
@@ -80,14 +79,6 @@ const useCounter = create((set, get) => ({
         set({ save: data.save });
     },
 
-    toggleHistory: async () => {
-        const state = get();
-        if (!state.history) {
-            set({ history: true });
-        } else {
-            set({ history: false });
-        }
-    }
 }));
 
 export default useCounter;

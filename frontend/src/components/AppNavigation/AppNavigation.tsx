@@ -1,8 +1,8 @@
-import useCounter from "../hooks/useCounter";
+import useView from "../hooks/useView";
 import './app-navigation.scss';
 
 const AppNavigation = () => {
-    const { history, toggleHistory } = useCounter();
+    const {showHistory, toggleHistory } = useView();
     
     return (
         <div className="header__wrapper-nav">
@@ -13,7 +13,7 @@ const AppNavigation = () => {
                             className="nav__link"
                             onClick={() => toggleHistory()}
                         >
-                            {history ? 'close history' : 'open history'}
+                            {showHistory ? 'close history' : 'open history'}
                         </a>
                     </li>
                     <li className="nav__item">

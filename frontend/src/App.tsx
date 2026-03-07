@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import useCounter from './components/hooks/useCounter';
-import Button from './components/buttom/button';
 import { initUserId } from './util/user-id/userID';
-import SaveCounters from './components/saveCounters/save-counters';
 import Header from './components/AppHeader/AppHeader';
+import CounterView from './components/CounterView/CounterView';
 
 
 import './app.scss';
@@ -23,28 +22,19 @@ function App() {
         
     }, []);
 
-    const dataButton = [
-        { name: 'Plus', f: plusCount },
-        { name: 'Minus', f: minusCount },
-        { name: 'Random', f: randomCounter },
-        { name: 'Reset', f: reset },
-        { name: 'Save', f: onSave },
-    ];
 
-    const viewButtons = dataButton.map(({name, f}, index) => {
-        return <Button text={name} event={f} key={index}></Button>;
-    });
 
     return (
         <>
             <Header/>
-                <div className='container'>
+                {/* <div className='container'>
                     <section className='card'>
                         <span className='card__count'>{count}</span>
                         <div className="card__wrapper">{viewButtons}</div>
                     </section>
                     {history ? <SaveCounters/> : null}
-                </div>
+                </div> */}
+                <CounterView/>
         </>
     );
 }
