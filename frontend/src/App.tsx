@@ -8,7 +8,7 @@ import CounterView from './components/CounterView/CounterView';
 import './app.scss';
 
 function App() {
-    const { count, plusCount, minusCount, randomCounter, reset, initCounter, initUserIdState, onSave, initSave, history } = useCounter();
+    const { initCounter, initUserIdState, initSave } = useCounter();
 
     useEffect(() => {
         const init = async () => {
@@ -22,19 +22,10 @@ function App() {
         
     }, []);
 
-
-
     return (
         <>
             <Header/>
-                {/* <div className='container'>
-                    <section className='card'>
-                        <span className='card__count'>{count}</span>
-                        <div className="card__wrapper">{viewButtons}</div>
-                    </section>
-                    {history ? <SaveCounters/> : null}
-                </div> */}
-                <CounterView/>
+            <CounterView/>
         </>
     );
 }
