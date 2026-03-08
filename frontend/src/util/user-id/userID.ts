@@ -1,6 +1,12 @@
 
-export const initUserId = async () => {
+type InitUserResponse = {
+    userID: string | null;
+};
+
+export const initUserId = async (): Promise<InitUserResponse> => {
+
     const userID = localStorage.getItem('userId');
+    console.log(`line 4 ${userID}`);
 
     if (!userID) {
         const res = await fetch('http://localhost:3000/init', {
@@ -8,11 +14,9 @@ export const initUserId = async () => {
         });
 
         const data = await res.json();
-        
         localStorage.setItem('userId', data.id);
-       
-        return data.id;
-    }
-    console.log(`file UserID / line 17 = ${userID}`);
+        return { userID: data.id };
+    }  
+
     return { userID };
 };

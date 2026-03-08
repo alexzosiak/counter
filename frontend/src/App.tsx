@@ -3,6 +3,9 @@ import useCounter from './components/hooks/useCounter';
 import { initUserId } from './util/user-id/userID';
 import Header from './components/AppHeader/AppHeader';
 import CounterView from './components/CounterView/CounterView';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from './pages/mainPage';
+import About from './pages/aboutPage';
 
 
 import './app.scss';
@@ -23,10 +26,13 @@ function App() {
     }, []);
 
     return (
-        <>
+        <BrowserRouter>
             <Header/>
-            <CounterView/>
-        </>
+            <Routes>
+                <Route path='/' element={<MainPage/>}></Route>
+                <Route path='/about' element={<About/>}></Route>
+            </Routes>     
+        </BrowserRouter>
     );
 }
 

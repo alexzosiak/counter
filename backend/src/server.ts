@@ -40,7 +40,6 @@ app.post('/init', (req, res) => {
     const db = readDB();
     const id = Math.random().toString(36).substring(2, 10);
 
-
     db[id] = { count: 0, save: [] };
     writeDB(db);
 

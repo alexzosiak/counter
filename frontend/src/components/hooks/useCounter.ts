@@ -8,9 +8,9 @@ const useCounter = create((set, get) => ({
     id: '',
     save: [],
 
-    initUserIdState: (res: string) => {
+    initUserIdState: async (res: string) => {
         const newValue = res;
-        console.log(newValue);
+        console.log(`inituserIdState id = ${newValue}`);
         set({id: newValue});
     },
 
@@ -19,6 +19,8 @@ const useCounter = create((set, get) => ({
         if(!id) {
             return
         }
+
+        console.log(`init save = ${id}`)
         const data = await getSave(id);
         set({save: data.save})
     },
@@ -28,6 +30,8 @@ const useCounter = create((set, get) => ({
         if (!id) {
             return
         }
+
+        console.log(`init Counter id = ${id}`)
 
         const data = await getCounter(id);
         set({ count: data.count });
