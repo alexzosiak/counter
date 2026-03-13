@@ -1,102 +1,102 @@
-import express from 'express';
-import cors from 'cors';
-import { readDB, writeDB } from './ssd.ts';
+// import express from 'express';
+// import cors from 'cors';
+// import { readDB, writeDB } from './ssd.ts';
 
-const app = express();
-const PORT = 3000;
+// const app = express();
+// const PORT = 3000;
 
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
+// app.use(express.json());
 
 
-app.get('/counter/:id', (req, res) => {
-    const db = readDB();
-    const user = db[req.params.id];
+// app.get('/counter/:id', (req, res) => {
+//     const db = readDB();
+//     const user = db[req.params.id];
     
-    if (!user) {
-        return res.status(404).json({ error: 'Not found' });
-    }
+//     if (!user) {
+//         return res.status(404).json({ error: 'Not found' });
+//     }
 
-    res.json(user);
-});
+//     res.json(user);
+// });
 
-app.post('/counter/:id', (req, res) => {
-    const db = readDB();
-    const user = db[req.params.id];
+// app.post('/counter/:id', (req, res) => {
+//     const db = readDB();
+//     const user = db[req.params.id];
 
-    if (!user) {
-        return res.status(404).json({ error: 'Not found' });
-    }
+//     if (!user) {
+//         return res.status(404).json({ error: 'Not found' });
+//     }
 
-    const { value } = req.body;
-    user.count = value;
-    writeDB(db);
+//     const { value } = req.body;
+//     user.count = value;
+//     writeDB(db);
 
-    res.json(user);
-});
+//     res.json(user);
+// });
 
 
-app.post('/init', (req, res) => {
-    const db = readDB();
-    const id = Math.random().toString(36).substring(2, 10);
+// app.post('/init', (req, res) => {
+//     const db = readDB();
+//     const id = Math.random().toString(36).substring(2, 10);
 
-    db[id] = { count: 0, save: [] };
-    writeDB(db);
+//     db[id] = { count: 0, save: [] };
+//     writeDB(db);
 
-    res.json({ id, count: 0 });
-});
+//     res.json({ id, count: 0 });
+// });
 
-app.get('/save/:id', (req, res) => {
-    const db = readDB();
-    const user = db[req.params.id];
+// app.get('/save/:id', (req, res) => {
+//     const db = readDB();
+//     const user = db[req.params.id];
 
-    if (!user) {
-        return res.status(404).json({ error: 'Not found' });
-    }
+//     if (!user) {
+//         return res.status(404).json({ error: 'Not found' });
+//     }
    
-    res.json(user);
-})
+//     res.json(user);
+// })
 
-app.post('/save/:id', (req, res) => {
-    const db = readDB();
-    const user = db[req.params.id];
-    const time = Date.now();
+// app.post('/save/:id', (req, res) => {
+//     const db = readDB();
+//     const user = db[req.params.id];
+//     const time = Date.now();
 
-    const id = Math.random().toString(36).substring(2, 10);
-    if (!user) {
-        return res.status(404).json({ error: 'Not found' });
-    }
+//     const id = Math.random().toString(36).substring(2, 10);
+//     if (!user) {
+//         return res.status(404).json({ error: 'Not found' });
+//     }
 
 
 
-    const { value } = req.body;
+//     const { value } = req.body;
 
-    user.save.push({id: id, value: value, timestamp: time})
+//     user.save.push({id: id, value: value, timestamp: time})
    
-    writeDB(db);
+//     writeDB(db);
 
-    res.json(user);
-})
+//     res.json(user);
+// })
 
-app.post('/delete/:id', (req, res) => {
-    const db = readDB();
-    const user = db[req.params.id];
-    const { idUser, idSave } = req.body;
+// app.post('/delete/:id', (req, res) => {
+//     const db = readDB();
+//     const user = db[req.params.id];
+//     const { idUser, idSave } = req.body;
     
-    if (!db[idUser]) {
-        return res.status(404).json({ error: "User not found" });
-    }
+//     if (!db[idUser]) {
+//         return res.status(404).json({ error: "User not found" });
+//     }
 
-    db[idUser].save = db[idUser].save.filter(
-        item => item.id !== idSave
-    );
+//     db[idUser].save = db[idUser].save.filter(
+//         item => item.id !== idSave
+//     );
 
-    writeDB(db)
+//     writeDB(db)
     
-    res.json({message: 'item deleted'});
-})
+//     res.json({message: 'item deleted'});
+// })
 
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
