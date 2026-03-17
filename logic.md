@@ -54,6 +54,10 @@ The history should contain:
 - the counter value
 - the time when the record was created
 
+The user can:
+
+- delete history
+
 The history is shown as a list on the screen.  
 New records appear at the top of the list.
 
