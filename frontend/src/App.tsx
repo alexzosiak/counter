@@ -1,24 +1,28 @@
 import { useEffect } from 'react';
-import useCounter from './components/hooks/useCounter';
+import useCounter from './store/useCounter';
 import { initUserId } from './util/user-id/userID';
 import Header from './components/AppHeader/AppHeader';
-import CounterView from './components/CounterView/CounterView';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainPage from './pages/mainPage';
-import About from './pages/aboutPage';
-
+import MainPage from './pages/MainPage';
+import About from './pages/AboutPage';
 
 import './app.scss';
 
+type useCounterType = {
+    initCount: (id: string | null) => void;
+    initUserIdState: (id: string | null) => void;
+    initSaveCount: (id: string | null) => void;
+}
+
 function App() {
-    const { initCounter, initUserIdState, initSave } = useCounter();
+    const { initCount, initUserIdState, initSaveCount } = useCounter() as useCounterType;
 
     useEffect(() => {
         const init = async () => {
             const id = await initUserId();
             initUserIdState(id.userID);
-            initCounter(id.userID);
-            initSave(id.userID);
+            initCount(id.userID);
+            initSaveCount(id.userID);
         };
 
         init();

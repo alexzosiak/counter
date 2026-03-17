@@ -1,4 +1,4 @@
-import useCounter from '../hooks/useCounter';
+import useCounter from '../../store/useCounter';
 import { FaTrash } from "react-icons/fa";
 import timeTransform from '../../util/time-transform/time-transform';
 import './save-counters.scss';
@@ -9,9 +9,14 @@ type Datas = {
     timestamp: string
 }
 
+type CounterState = {
+    save: [];
+    onDeleteCount: (id: string) => void;
+}
+
 
 const SaveCounters = () => {
-    const {save, onDelete } = useCounter();
+    const {save, onDeleteCount } = useCounter() as CounterState;
 
     const elements = save.map(({id, value, timestamp}: Datas)  => {
         
@@ -26,7 +31,7 @@ const SaveCounters = () => {
                     <span className='save__time'>{`time: ${hours}:${minutes}:${seconds}`}</span>
                 </div> 
                 <span className='save__text'>{value}</span>
-                <FaTrash className='save__bin' id={id} onClick={() => onDelete(id)}/>         
+                <FaTrash className='save__bin' id={id} onClick={() => onDeleteCount(id)}/>         
             </li>
         )
     });

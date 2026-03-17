@@ -1,13 +1,20 @@
-import useCounter from "../hooks/useCounter";
-import useView from '../hooks/useView';
+import useCounter from "../../store/useCounter";
+import useView from '../../store/useView';
 import CounterHystory from "../CounterHistory/ConterHistory";
 import CounterAction from '../CounterAction/CounterAction';
 
-const CounterView = () => {
-    const { count } = useCounter();
-    const { showHistory } = useView();
+type Counts = {
+    count: number
+}
 
- 
+type View = {
+    showHistory: boolean
+}
+
+const CounterView = () => {
+    const { count } = useCounter() as Counts;
+    const { showHistory } = useView() as View;
+
     return (
         <section className="container">
             <div className="card">

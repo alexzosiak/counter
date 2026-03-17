@@ -1,9 +1,14 @@
-import useView from "../hooks/useView";
+import useView from "../../store/useView";
 import { Link } from "react-router-dom";
 import './app-navigation.scss';
 
+type ViewState = {
+    showHistory: boolean;
+    toggleHistory: () => void;
+}
+
 const AppNavigation = () => {
-    const {showHistory, toggleHistory } = useView();
+    const {showHistory, toggleHistory } = useView() as ViewState;
     
     return (
         <div className="header__wrapper-nav">

@@ -1,7 +1,5 @@
 import { create } from 'zustand';
-import { getCounter, setCounter, setSave, getSave, deleteSaveItem} from '../../api/Api';
-
-
+import { getCounter, setCounter, setSave, getSave, deleteSaveItem} from '../api/Api';
 
 const useCounter = create((set, get) => ({
     count: 0,
@@ -14,7 +12,7 @@ const useCounter = create((set, get) => ({
         set({id: newValue});
     },
 
-    initSave: async (res: string) => {
+    initSaveCount: async (res: string) => {
         const id = res;
         if(!id) {
             return
@@ -25,7 +23,7 @@ const useCounter = create((set, get) => ({
         set({save: data.save})
     },
 
-    initCounter: async (res: string) => {
+    initCount: async (res: string) => {
         const id = res;
         if (!id) {
             return
@@ -51,22 +49,22 @@ const useCounter = create((set, get) => ({
         await setCounter(state.id, newValue);
     },
 
-    randomCounter: async () => {
+    randomCount: async () => {
         const state = get();
         const newValue = Math.floor(Math.random() * (0 - 100) + 100);
         set({ count: newValue });
         await setCounter(state.id, newValue);
     },
 
-    reset: async () => {
+    resetCount: async () => {
         const state = get();
         const newValue = 0;
         set({ count: newValue });
         await setCounter(state.id, newValue);
     },
 
-    onSave: async () => {
-        const {id, count} = get();
+    onSaveCount: async () => {
+        const {id, count} = get() as StateProps;
         const newValue = 0;
         set({count: newValue});
         await setCounter(id, newValue);
@@ -75,8 +73,8 @@ const useCounter = create((set, get) => ({
         set({ save: data.save})
     },
 
-    onDelete: async (res: string) => {
-        const state = get();
+    onDeleteCount: async (res: string) => {
+        const state = get() as StateProps;
 
         await deleteSaveItem(state.id, res);
         const data = await getSave(state.id);

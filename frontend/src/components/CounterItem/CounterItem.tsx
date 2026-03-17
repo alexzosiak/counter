@@ -1,4 +1,4 @@
-import useCounter from '../hooks/useCounter';
+import useCounter from '../../store/useCounter';
 import { FaTrash } from 'react-icons/fa';
 import timeTransform from '../../util/time-transform/time-transform';
 
@@ -8,12 +8,16 @@ type Datas = {
     timestamp: string;
 };
 
-const CounterItem = () => {
-    const { save, onDelete } = useCounter();
+type StateItem = {
+    save: [];
+    onDeleteCount: (id: string) => void;
+}
 
+const CounterItem = () => {
+    const { save, onDeleteCount } = useCounter() as StateItem;
+    
     const elements = save.map(({ id, value, timestamp }: Datas) => {
-        const { day, month, year, hours, minutes, seconds } =
-            timeTransform(timestamp);
+        const { day, month, year, hours, minutes, seconds } = timeTransform(timestamp);
 
         return (
             <li key={id} className="save__item">
@@ -26,13 +30,13 @@ const CounterItem = () => {
                 <FaTrash
                     className="save__bin"
                     id={id}
-                    onClick={() => onDelete(id)}
+                    onClick={() => onDeleteCount(id)}
                 />
             </li>
         );
     });
 
-    const sortElements = elements.reverse();
+    const sortElements = elements;
 
     return sortElements;
 };

@@ -1,4 +1,3 @@
-
 const way = 'http://localhost:3000';
 
 export const getCounter = async (id: string) => {
@@ -21,7 +20,7 @@ export const getSave = async(id: string) => {
     return res.json();
 }
 
-export const setSave = async (id: string, value: number ) => {
+export const setSave = async (id: string, value: number) => {
       await fetch(`${way}/save/${id}`, {
         method: 'POST',
         headers: {
