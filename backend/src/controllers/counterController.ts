@@ -1,13 +1,11 @@
 import * as counterService from '../services/counterService';
 
-
 export const getCounter = (req, res) => {
     const user = counterService.getUser(req.params.id);
     if (!user) return res.status(404).json({ error: 'Not found' });
 
     res.json(user);
 };
-
 
 export const updateCounter = (req, res) => {
     try {

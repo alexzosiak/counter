@@ -2,7 +2,13 @@ import { readDB, writeDB } from '../ssd.ts';
 
 export const getUser = (id: string) => {
     const db = readDB();
-    return db[id];
+    const user = db[id];
+    const filterUser = {
+        ...user,
+        save: [...user.save].sort((a, b) => b.timestamp - a.timestamp)
+    }
+    
+    return filterUser;
 };
 
 export const updateCounter = (id: string, value: number) => {
@@ -22,7 +28,6 @@ export const initUser = () => {
     writeDB(db);
     return { id, count: 0 };
 };
-
 
 export const addSave = (id: string, value: any) => {
     const db = readDB();

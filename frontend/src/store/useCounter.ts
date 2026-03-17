@@ -64,17 +64,18 @@ const useCounter = create((set, get) => ({
     },
 
     onSaveCount: async () => {
-        const {id, count} = get() as StateProps;
+        const {id, count} = get();
         const newValue = 0;
         set({count: newValue});
         await setCounter(id, newValue);
         await setSave(id, count);
         const data = await getSave(id);
+        console.log(data)
         set({ save: data.save})
     },
 
     onDeleteCount: async (res: string) => {
-        const state = get() as StateProps;
+        const state = get();
 
         await deleteSaveItem(state.id, res);
         const data = await getSave(state.id);
