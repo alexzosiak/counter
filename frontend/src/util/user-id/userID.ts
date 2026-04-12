@@ -14,6 +14,7 @@ export const initUserId = async (): Promise<InitUserResponse> => {
         });
 
         const data = await res.json();
+        console.log(`line 4/2 ${data}`);
         localStorage.setItem('userId', data.id);
         return { userID: data.id };
     }  

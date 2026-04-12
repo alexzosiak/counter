@@ -5,6 +5,7 @@ const useCounter = create((set, get) => ({
     count: 0,
     id: '',
     save: [],
+    loading: true,
 
     initUserIdState: async (res: string) => {
         const newValue = res;
@@ -28,10 +29,11 @@ const useCounter = create((set, get) => ({
         if (!id) {
             return
         }
-
+        
         console.log(`init Counter id = ${id}`)
 
         const data = await getCounter(id);
+        console.log('data', data)
         set({ count: data.count });
     },
 
@@ -70,8 +72,8 @@ const useCounter = create((set, get) => ({
         await setCounter(id, newValue);
         await setSave(id, count);
         const data = await getSave(id);
-        console.log(data)
-        set({ save: data.save})
+        console.log(data);
+        set({ save: data})
     },
 
     onDeleteCount: async (res: string) => {

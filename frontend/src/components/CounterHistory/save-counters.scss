@@ -19,10 +19,11 @@
     &__list {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: center;   
+        
         align-items: center;
         gap: 4px;
-        
+       
     }
 
     &__item {
@@ -34,6 +35,7 @@
         border: 1px solid rgba(0, 0, 0, 0.297);
         padding: 2px 5px;
         border-radius: 5px;
+        list-style-type: none;
     }
 
      &__item-wrapper {

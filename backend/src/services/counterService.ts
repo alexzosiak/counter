@@ -1,52 +1,51 @@
-import { readDB, writeDB } from '../ssd.ts';
+import postgresql from 'pg';
+const { Pool } = postgresql;
 
-export const getUser = (id: string) => {
-    const db = readDB();
-    const user = db[id];
-    const filterUser = {
-        ...user,
-        save: [...user.save].sort((a, b) => b.timestamp - a.timestamp)
-    }
-    
-    return filterUser;
+const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'counter_database',
+    password: 'admin',
+    port: 5432,
+});
+
+export const getUser = async (id: string) => {
+    const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    console.log(result);
+    return result.rows[0];
 };
 
-export const updateCounter = (id: string, value: number) => {
-    const db = readDB();
-    const user = db[id];
-    if (!user) throw new Error('User not found');
-
-    user.count = value;
-    writeDB(db);
-    return user;
+export const updateCounter = async (id: string, value: number) => {
+    const result = await pool.query(`UPDATE users SET count = $1 WHERE id = $2 RETURNING *`, [value, id])
+    return result.rows[0];
 };
 
-export const initUser = () => {
-    const db = readDB();
-    const id = Math.random().toString(36).substring(2, 10);
-    db[id] = { count: 0, save: [] };
-    writeDB(db);
-    return { id, count: 0 };
+
+export const initUser = async (id: string, count: number) => {
+    const result = await pool.query(
+        `INSERT INTO users (id, count) VALUES ($1, $2) RETURNING *`,
+        [id, count]
+    );
+    return result.rows[0];
 };
 
-export const addSave = (id: string, value: any) => {
-    const db = readDB();
-    const user = db[id];
-    if (!user) throw new Error('User not found');
-
-    const time = Date.now();
-    const saveId = Math.random().toString(36).substring(2, 10);
-
-    user.save.push({ id: saveId, value, timestamp: time });
-    writeDB(db);
-    return user;
+export const addSave = async (id: string, saveId: string, value: number, time: Date) => {
+    const result = await pool.query('INSERT INTO saves (id, group_id, value, timestamp) VALUES ($1, $2, $3, $4) RETURNING *', 
+        [saveId, id, value, time]);
+    return result.rows[0];
 };
 
-export const deleteSave = (idUser: string, idSave: string) => {
-    const db = readDB();
-    const user = db[idUser];
-    if (!user) throw new Error('User not found');
+export const getUserSave = async (saveId: string) => {
+    const result = await pool.query('SELECT * FROM saves WHERE group_id = $1 ORDER BY timestamp DESC',
+    [saveId]);
+    return result.rows;
+}
 
-    user.save = user.save.filter(item => item.id !== idSave);
-    writeDB(db);
-};
+// export const deleteSave = (idUser: string, idSave: string) => {
+//     const db = readDB();
+//     const user = db[idUser];
+//     if (!user) throw new Error('User not found');
+
+//     user.save = user.save.filter(item => item.id !== idSave);
+//     writeDB(db);
+// };

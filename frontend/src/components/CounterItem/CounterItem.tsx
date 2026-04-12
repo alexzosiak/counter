@@ -9,14 +9,16 @@ type Datas = {
 };
 
 type StateItem = {
-    save: [];
+    save: Datas[];
     onDeleteCount: (id: string) => void;
 }
 
 const CounterItem = () => {
     const { save, onDeleteCount } = useCounter() as StateItem;
     
-    const elements = save.map(({ id, value, timestamp }: Datas) => {
+    if (!save) return <div>Loading...</div>;
+
+    const elements = save?.map(({ id, value, timestamp }: Datas) => {
         const { day, month, year, hours, minutes, seconds } = timeTransform(timestamp);
 
         return (

@@ -8,8 +8,10 @@ type Counts = {
 }
 
 type View = {
-    showHistory: boolean
+    showHistory: boolean,
+ 
 }
+
 
 const CounterView = () => {
     const { count } = useCounter() as Counts;
