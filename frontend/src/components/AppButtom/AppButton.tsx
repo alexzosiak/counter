@@ -1,8 +1,6 @@
 import type { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
-import './AppButton.scss';
 
 type buttonProps = PropsWithChildren<ComponentPropsWithoutRef<'button'>>
- 
 
 const AppButton = ({ children, className = '', type = 'button', ...props} : buttonProps): JSX.Element => {
     return (

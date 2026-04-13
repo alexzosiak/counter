@@ -7,7 +7,7 @@ import MainPage from './pages/MainPage';
 import About from './pages/AboutPage';
 import NotFound from './pages/NotFound';
 
-import './app.scss';
+
 
 type useCounterType = {
     initCount: (id: string | null) => void;

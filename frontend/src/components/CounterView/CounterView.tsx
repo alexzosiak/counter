@@ -4,6 +4,8 @@ import CounterHystory from "../CounterHistory/ConterHistory";
 import CounterAction from '../CounterAction/CounterAction';
 import AppButton from "../AppButtom/AppButton";
 
+import './CounterView.scss';
+
 type Counts = {
     count: number
 }
@@ -23,10 +25,8 @@ const CounterView = () => {
                 <span className="card__count">{count}</span>
                 <div className="card__wrapper">{<CounterAction/>}</div>
             </div>
-             <a className="nav__link" onClick={() => toggleHistory()}>
-                    {showHistory ? 'close history' : 'open history'}</a>
-
             <AppButton onClick={() => toggleHistory()}>{showHistory ? 'close history' : 'open history'}</AppButton>
+            
             {showHistory ? <CounterHystory/> : null}
         </section>
     );
