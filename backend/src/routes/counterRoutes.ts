@@ -10,7 +10,7 @@ router.post('/counter/:id', counterController.updateCounter);
 
 router.get('/save/:id', counterController.getSave);
 router.post('/save/:id', counterController.addSave);
-// router.post('/delete/:id', counterController.deleteSave);
+router.post('/delete/:id', counterController.deleteSave);
 
 export default router;
 

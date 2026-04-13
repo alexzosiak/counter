@@ -5,6 +5,7 @@ import Header from './components/AppHeader/AppHeader';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from './pages/MainPage';
 import About from './pages/AboutPage';
+import NotFound from './pages/NotFound';
 
 import './app.scss';
 
@@ -35,6 +36,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<MainPage/>}></Route>
                 <Route path='/about' element={<About/>}></Route>
+                <Route path='*' element={<NotFound/>}></Route>
             </Routes>     
         </BrowserRouter>
     );

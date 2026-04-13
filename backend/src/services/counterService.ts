@@ -41,11 +41,8 @@ export const getUserSave = async (saveId: string) => {
     return result.rows;
 }
 
-// export const deleteSave = (idUser: string, idSave: string) => {
-//     const db = readDB();
-//     const user = db[idUser];
-//     if (!user) throw new Error('User not found');
-
-//     user.save = user.save.filter(item => item.id !== idSave);
-//     writeDB(db);
-// };
+export const deleteSave = async (idUser: string, idSave: string) => {
+    if (!idUser || !idSave) throw new Error('User not found');
+    const result = await pool.query('DELETE FROM saves WHERE id = $1 AND group_id = $2', [idSave, idUser]);
+    return result.rows[0];
+};

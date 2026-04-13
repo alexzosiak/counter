@@ -19,7 +19,6 @@ export const setCounter = async (id: string, value: number) => {
 
 export const getSave = async(id: string) => {
     const res = await fetch(`${way}/save/${id}`);
-
     return res.json();
 }
 

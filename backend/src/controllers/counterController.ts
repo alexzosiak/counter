@@ -11,8 +11,6 @@ export const initCounter = async (req, res) => {
     }
 };
 
-
-
 export const getCounter = async (req, res) => {
     try {
         const { id } = await req.params;
@@ -35,11 +33,10 @@ export const updateCounter = async (req, res) => {
     }
 };
 
-
-
 export const getSave = async (req, res) => {
+    const { id } = await req.params;
     try {
-        const user = await counterService.getUserSave(req.params.id);
+        const user = await counterService.getUserSave(id);
         if (!user) return res.status(404).json({ error: 'Not found' });
         return res.json(user);
     } catch (err) {
@@ -60,11 +57,12 @@ export const addSave = async (req, res) => {
     }
 };
 
-// export const deleteSave = (req, res) => {
-//     try {
-//         counterService.deleteSave(req.body.idUser, req.body.idSave);
-//         res.json({ message: 'item deleted' });
-//     } catch (err) {
-//         res.status(404).json({ error: err.message });
-//     }
-// };
+export const deleteSave = (req, res) => {
+    const { idUser, idSave } = req.body;
+    try {
+        counterService.deleteSave(idUser, idSave);
+        res.json({ message: 'item deleted' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
