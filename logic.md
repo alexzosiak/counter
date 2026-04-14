@@ -56,6 +56,7 @@ The history should contain:
 
 The user can:
 
+- look histiry
 - delete history
 
 The history is shown as a list on the screen.  

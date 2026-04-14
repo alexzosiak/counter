@@ -1,6 +1,9 @@
+import About from "../components/About/About";
 
-const About = () => {
-    return <h1>dsadasdasdas</h1>
+const AboutPage = () => {
+    return (
+        <About/>
+    )
 }
 
-export default About;
+export default AboutPage;
