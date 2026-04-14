@@ -13,10 +13,11 @@ type StateItem = {
     onDeleteCount: (id: string) => void;
 }
 
+
 const CounterItem = () => {
     const { save, onDeleteCount } = useCounter() as StateItem;
     
-    if (!save) return <div>Loading...</div>;
+    if (save.length === 0) return <div>This user <span style={{color: 'red'}}>does not</span> have any history yet</div>;
 
     const elements = save?.map(({ id, value, timestamp }: Datas) => {
         const { day, month, year, hours, minutes, seconds } = timeTransform(timestamp);

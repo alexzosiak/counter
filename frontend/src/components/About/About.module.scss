@@ -19,15 +19,19 @@
 
 .box {
   
-    padding: 50px 20px;
+    padding: 70px 20px;
     // border: 1px solid green;
 }
 .flex {
     display: flex;
     gap: 20px;
     align-items: center;
+    justify-content: space-between;
 }
 
 ul {
     padding-left: 20px;
+}
+hr {
+    margin: 0;
 }

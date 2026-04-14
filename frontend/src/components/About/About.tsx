@@ -1,14 +1,14 @@
 import style from './About.module.scss';
 import idKey from './img/id-key.png';
+import action from './img/action.png';
+import history from './img/history.png';
 
 const About = () => {
     return (
         <section>
             <div className={style.container}>
-                <h1 className={style.h1}>Counter Application Logic</h1>
-
                 <div className={style.box}>
-                    <h2 className={style.h2}>General Description</h2>
+                    <h2 className={style.h2}>Counter Application Logic</h2>
                     <p>
                         The application lets the user increase or decrease a
                         number counter. Each user has their own counter that is
@@ -24,11 +24,11 @@ const About = () => {
                     </h2>
                     <div className={style.flex}>
                         <div>
-                        <p>
-                            When the user opens the application for the first
-                            time:
-                        </p>
-                        
+                            <p>
+                                When the user opens the application for the
+                                first time:
+                            </p>
+
                             <ul>
                                 <li>
                                     The system checks if a user key exists in
@@ -60,9 +60,8 @@ const About = () => {
                                     </ul>
                                 </li>
                             </ul>
-                            </div>
-                            <img src={idKey} alt="id-key" width={'400px'} />
-                        
+                        </div>
+                        <img src={idKey} alt="id-key" width={'370px'} />
                     </div>
                 </div>
 
@@ -91,19 +90,24 @@ const About = () => {
 
                 <div className={style.box}>
                     <h2 className={style.h2}>Counter Actions</h2>
-                    <p>The user can:</p>
-                    <ul>
-                        <li>increase the value</li>
-                        <li>decrease the value</li>
-                        <li>generate a random value</li>
-                        <li>clear the value</li>
-                        <li>save the value to history</li>
-                    </ul>
-                    <p>After each change:</p>
-                    <ul>
-                        <li>1. the new value appears on the screen</li>
-                        <li>2. the new value is saved on the server</li>
-                    </ul>
+                    <div className={style.flex}>
+                        <div>
+                            <p>The user can:</p>
+                            <ul>
+                                <li>increase the value</li>
+                                <li>decrease the value</li>
+                                <li>generate a random value</li>
+                                <li>clear the value</li>
+                                <li>save the value to history</li>
+                            </ul>
+                            <p>After each change:</p>
+                            <ul>
+                                <li>1. the new value appears on the screen</li>
+                                <li>2. the new value is saved on the server</li>
+                            </ul>
+                        </div>
+                        <img src={action} alt="action-img" width={'400px'} />
+                    </div>
                 </div>
 
                 <hr />
@@ -131,6 +135,8 @@ const About = () => {
 
                 <div className={style.box}>
                     <h2 className={style.h2}>History</h2>
+                    <div className={style.flex}>
+                    <div>
                     <p>The history should contain:</p>
                     <ul>
                         <li>the counter value</li>
@@ -145,6 +151,9 @@ const About = () => {
                         The history is shown as a list on the screen. New
                         records appear at the top of the list.
                     </p>
+                    </div>
+                    <img src={history} alt="action-img" width={'340px'}/>
+                    </div>
                 </div>
             </div>
         </section>
